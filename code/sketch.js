@@ -6,8 +6,11 @@ var mazecreator;
 var defaultWidth = 20;
 var defaultHeight = 20;
 
-var drawingGrid = [];
-
+// Button initialization:
+var addRowButton;
+var addColumnButton;
+var removeRowButton;
+var removeColumnButton;
 
 function setup() {
 	createCanvas(800, 800);
@@ -16,6 +19,11 @@ function setup() {
 	state = states.type.DRAWING;
 
 	mazecreator = new MazeCreator(20, 200, 760, 580, defaultWidth, defaultHeight);
+
+	addRowButton = new Button(20, 20, 100, 40, "Add row", 15);
+	addColumnButton = new Button(200, 20, 100, 40, "Add column", 15);
+	removeRowButton = new Button(20, 100, 100, 40, "Remove row", 14);
+	removeColumnButton = new Button(200, 100, 100, 40, "Remove column", 11);
 }
 
 function draw() {
@@ -39,6 +47,10 @@ function draw() {
 // Maze creation phase
 function drawing() {
 	mazecreator.drawMaze();
+	addRowButton.show();
+	addColumnButton.show();
+	removeRowButton.show();
+	removeColumnButton.show();
 }
 
 // Mase solving phase
