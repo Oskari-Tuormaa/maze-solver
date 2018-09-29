@@ -81,10 +81,10 @@ class MazeCreator {
 	// Adds n rows to maze
 	addRows(n) {
 		for (var i = 0; i < n; i++) {
-			for (var j = 0; j < this.mazeH; j++) {
-				this.data.splice(this.mazeW * (j + 1), 0, 0);
-			}
 			this.mazeW++;
+			for (var j = 0; j < this.mazeH; j++) {
+				this.data.splice((j + 1) * this.mazeW - 1, 0, 0);
+			}
 			rowText.text++;
 		}
 	}
@@ -138,8 +138,7 @@ class MazeCreator {
 		var indexX = floor(localX / cellWidth);
 		var indexY = floor(localY / cellHeight);
 
-		var value = this.data[indexX + indexY * this.mazeW];
-		this.data[indexX + indexY * this.mazeW] = (value + 1) % 2;
+		this.data[indexX + indexY * this.mazeW] = drawingMode;
 	}
 
 	// Adds walls to maze

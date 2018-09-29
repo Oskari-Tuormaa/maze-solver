@@ -2,6 +2,7 @@ var states = {};
 var state;
 
 var mazecreator;
+var drawingMode = 1;
 
 var defaultWidth = 20;
 var defaultHeight = 20;
@@ -15,6 +16,7 @@ var removeRowButton;
 var removeColumnButton;
 var addWallsButton;
 var clearButton;
+var drawingModeButton;
 
 function setup() {
 	createCanvas(800, 800);
@@ -29,16 +31,19 @@ function setup() {
 
 	addRowButton = new Button(20, 20, 100, 40, "Add row", 15,
 		mazecreator.addRows.bind(mazecreator));
-	addColumnButton = new Button(200, 20, 100, 40, "Add column", 15,
-		mazecreator.addColumns.bind(mazecreator));
 	removeRowButton = new Button(20, 100, 100, 40, "Remove row", 14,
 		mazecreator.removeRows.bind(mazecreator));
+	addColumnButton = new Button(200, 20, 100, 40, "Add column", 15,
+		mazecreator.addColumns.bind(mazecreator));
 	removeColumnButton = new Button(200, 100, 100, 40, "Remove column", 11,
 		mazecreator.removeColumns.bind(mazecreator));
 	addWallsButton = new Button(380, 20, 100, 40, "Add walls", 14,
 		mazecreator.addWalls.bind(mazecreator));
 	clearButton = new Button(380, 100, 100, 40, "Clear", 15,
 		mazecreator.clearMaze.bind(mazecreator));
+	drawingModeButton = new Button(560, 20, 100, 40, "ADDING", 15,
+		switchDrawingMode);
+	drawingModeButton.bounds.color = [100, 255, 100];
 }
 
 function draw() {
@@ -59,19 +64,35 @@ function draw() {
 	}
 }
 
-// Maze creation phase
+// Maze creation phase.
 function drawing() {
 	showGUI();
 }
 
-// Mase solving phase
+// Mase solving phase.
 function solving() {
 
 }
 
-// Showing solved maze phase
+// Showing solved maze phase.
 function done() {
 
+}
+
+// Switch the current drawing mode.
+function switchDrawingMode() {
+	drawingMode = (1 + drawingMode) % 2;
+	switch (drawingMode) {
+		case 1:
+			drawingModeButton.text = "ADDING";
+			drawingModeButton.bounds.color = [100, 255, 100];
+			break;
+
+		case 0:
+			drawingModeButton.text = "REMOVING";
+			drawingModeButton.bounds.color = [255, 100, 100];
+			break;
+	}
 }
 
 // Adding enumerator functionality to javascript
