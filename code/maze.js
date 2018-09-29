@@ -85,6 +85,7 @@ class MazeCreator {
 				this.data.splice(this.mazeW * (j + 1), 0, 0);
 			}
 			this.mazeW++;
+			rowText.text++;
 		}
 	}
 
@@ -96,6 +97,7 @@ class MazeCreator {
 				this.data.splice((this.mazeW - 1) * (j + 1), 1);
 			}
 			this.mazeW--;
+			rowText.text--;
 		}
 	}
 
@@ -106,6 +108,7 @@ class MazeCreator {
 				this.data.push(0);
 			}
 			this.mazeH++;
+			columnText.text++;
 		}
 	}
 
@@ -116,6 +119,7 @@ class MazeCreator {
 				this.data.pop();
 			}
 			this.mazeH--;
+			columnText.text--;
 		}
 	}
 
@@ -136,5 +140,23 @@ class MazeCreator {
 
 		var value = this.data[indexX + indexY * this.mazeW];
 		this.data[indexX + indexY * this.mazeW] = (value + 1) % 2;
+	}
+
+	// Adds walls to maze
+	addWalls() {
+		this.data.fill(1, 0, this.mazeW);
+		this.data.fill(1, -this.mazeW);
+
+		for (var i = 1; i < this.mazeH - 1; i++) {
+			this.data[i * this.mazeW] = 1;
+			this.data[this.mazeW - 1 + i * this.mazeW] = 1;
+		}
+	}
+
+	// Deletes all walls in maze -> Set all data to 0.
+	clearMaze() {
+		for (var i = 0; i < this.data.length; i++) {
+			this.data[i] = 0;
+		}
 	}
 }

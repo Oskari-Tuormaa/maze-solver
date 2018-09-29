@@ -8,9 +8,13 @@ var defaultHeight = 20;
 
 // Button initialization:
 var addRowButton;
+var rowText;
 var addColumnButton;
+var columnText;
 var removeRowButton;
 var removeColumnButton;
+var addWallsButton;
+var clearButton;
 
 function setup() {
 	createCanvas(800, 800);
@@ -20,10 +24,21 @@ function setup() {
 
 	mazecreator = new MazeCreator(20, 200, 760, 580, defaultWidth, defaultHeight);
 
-	addRowButton = new Button(20, 20, 100, 40, "Add row", 15);
-	addColumnButton = new Button(200, 20, 100, 40, "Add column", 15);
-	removeRowButton = new Button(20, 100, 100, 40, "Remove row", 14);
-	removeColumnButton = new Button(200, 100, 100, 40, "Remove column", 11);
+	rowText = new TextBox(20, 60, 100, 40, mazecreator.mazeW, 15);
+	columnText = new TextBox(200, 60, 100, 40, mazecreator.mazeH, 15);
+
+	addRowButton = new Button(20, 20, 100, 40, "Add row", 15,
+		mazecreator.addRows.bind(mazecreator));
+	addColumnButton = new Button(200, 20, 100, 40, "Add column", 15,
+		mazecreator.addColumns.bind(mazecreator));
+	removeRowButton = new Button(20, 100, 100, 40, "Remove row", 14,
+		mazecreator.removeRows.bind(mazecreator));
+	removeColumnButton = new Button(200, 100, 100, 40, "Remove column", 11,
+		mazecreator.removeColumns.bind(mazecreator));
+	addWallsButton = new Button(380, 20, 100, 40, "Add walls", 14,
+		mazecreator.addWalls.bind(mazecreator));
+	clearButton = new Button(380, 100, 100, 40, "Clear", 15,
+		mazecreator.clearMaze.bind(mazecreator));
 }
 
 function draw() {
@@ -46,11 +61,7 @@ function draw() {
 
 // Maze creation phase
 function drawing() {
-	mazecreator.drawMaze();
-	addRowButton.show();
-	addColumnButton.show();
-	removeRowButton.show();
-	removeColumnButton.show();
+	showGUI();
 }
 
 // Mase solving phase
