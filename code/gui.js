@@ -2,13 +2,14 @@ class Rectangle {
 	constructor(x, y, w, h) {
 		this.pos = createVector(x, y);
 		this.scale = createVector(w, h);
+		this.color = [255, 255, 255];
 	}
 
 	// Draw rectangle to canvas.
 	show() {
 		push();
 		translate(this.pos.x, this.pos.y);
-		fill(255);
+		fill(this.color);
 		stroke(0);
 		strokeWeight(1);
 		rect(0, 0, this.scale.x, this.scale.y);
@@ -29,7 +30,7 @@ class Button {
 		this.bounds = new Rectangle(x, y, w, h);
 		this.text = text;
 		this.textSize = textSize;
-		this.functionCallback = functionCallback
+		this.functionCallback = functionCallback;
 	}
 
 	// Draws button to canvas
@@ -75,6 +76,7 @@ function showGUI() {
 			removeColumnButton.show();
 			addWallsButton.show();
 			clearButton.show();
+			drawingModeButton.show();
 			rowText.show();
 			columnText.show();
 			break;
