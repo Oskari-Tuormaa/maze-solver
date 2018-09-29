@@ -38,7 +38,7 @@ class Button {
 		this.bounds.show();
 		textSize(this.textSize);
 		fill(0);
-		text(this.text, this.bounds.pos.x + 10, this.bounds.pos.y + this.bounds.scale.x / 4);
+		text(this.text, this.bounds.pos.x + 10, this.bounds.pos.y + this.bounds.scale.y / 2);
 	}
 
 	// Checks bounds contains location x, y. If true, calls
@@ -76,7 +76,9 @@ function showGUI() {
 			removeColumnButton.show();
 			addWallsButton.show();
 			clearButton.show();
+			invertButton.show();
 			drawingModeButton.show();
+			tileButton.show();
 			rowText.show();
 			columnText.show();
 			break;

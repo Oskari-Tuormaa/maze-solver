@@ -7,7 +7,9 @@ function mousePressed() {
 			removeColumnButton.checkPressed(mouseX, mouseY);
 			addWallsButton.checkPressed(mouseX, mouseY);
 			clearButton.checkPressed(mouseX, mouseY);
+			invertButton.checkPressed(mouseX, mouseY);
 			drawingModeButton.checkPressed(mouseX, mouseY);
+			tileButton.checkPressed(mouseX, mouseY);
 			break;
 	}
 }
