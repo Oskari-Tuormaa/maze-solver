@@ -10,6 +10,8 @@ function mousePressed() {
 			invertButton.checkPressed(mouseX, mouseY);
 			drawingModeButton.checkPressed(mouseX, mouseY);
 			tileButton.checkPressed(mouseX, mouseY);
+			solveButton.checkPressed(mouseX, mouseY);
+			mazecreator.changeCellAtPos(mouseX, mouseY);
 			break;
 	}
 }

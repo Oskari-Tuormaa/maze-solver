@@ -79,8 +79,16 @@ function showGUI() {
 			invertButton.show();
 			drawingModeButton.show();
 			tileButton.show();
+			solveButton.show();
 			rowText.show();
 			columnText.show();
 			break;
+
+		case states.type.SOLVING:
+			drawnMaze.show(20, 20, width - 40, height - 40);
+			break;
+
+		case states.type.DONE:
+			solvedMaze.show(20, 20, width - 40, height - 40);
 	}
 }
