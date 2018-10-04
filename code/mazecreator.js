@@ -50,67 +50,67 @@ class MazeCreator {
 	resizeMaze(newW, newH) {
 		switch (newW > this.mazeW) {
 			case true:
-				this.addRows(newW - this.mazeW);
+				this.addColumns(newW - this.mazeW);
 				break;
 
 			case false:
-				this.removeRows(this.mazeW - newW);
+				this.removeColumns(this.mazeW - newW);
 				break;
 		}
 
 		switch (newH > this.mazeH) {
 			case true:
-				this.addColumns(newH - this.mazeH);
+				this.addRows(newH - this.mazeH);
 				break;
 
 			case false:
-				this.removeColumns(this.mazeH - newH);
+				this.removeRows(this.mazeH - newH);
 				break;
 		}
 	}
 
 	// Adds n rows to maze.
-	addRows(n) {
+	addColumns(n) {
 		for (var i = 0; i < n; i++) {
 			this.mazeW++;
 			for (var j = 0; j < this.mazeH; j++) {
 				this.data.splice((j + 1) * this.mazeW - 1, 0, 0);
 			}
-			rowText.text++;
+			columnText.text++;
 		}
 	}
 
 	// Removes n rows from maze.
-	removeRows(n) {
+	removeColumns(n) {
 		for (var i = 0; i < n && this.mazeW != 1; i++) {
 
 			for (var j = 0; j < this.mazeH; j++) {
 				this.data.splice((this.mazeW - 1) * (j + 1), 1);
 			}
 			this.mazeW--;
-			rowText.text--;
+			columnText.text--;
 		}
 	}
 
 	// Adds n columns to maze.
-	addColumns(n) {
+	addRows(n) {
 		for (var i = 0; i < n; i++) {
 			for (var j = 0; j < this.mazeW; j++) {
 				this.data.push(0);
 			}
 			this.mazeH++;
-			columnText.text++;
+			rowText.text++;
 		}
 	}
 
 	// Removes n columns from maze.
-	removeColumns(n) {
+	removeRows(n) {
 		for (var i = 0; i < n && this.mazeH != 1; i++) {
 			for (var j = 0; j < this.mazeW; j++) {
 				this.data.pop();
 			}
 			this.mazeH--;
-			columnText.text--;
+			rowText.text--;
 		}
 	}
 

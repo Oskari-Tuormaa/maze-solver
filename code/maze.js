@@ -95,19 +95,35 @@ class Maze {
 	// Initialize node data -> add neighbor nodes and calculate
 	// euclidian distance from each node to end node.
 	initializeNodes() {
+		var indexX;
+		var indexY;
+
 		for (var i in this.nodes) {
 			var index = this.nodes[i]["index"];
-			if (this.nodes[index - 1] != undefined) {
-				this.nodes[i]["neighbors"].push(this.nodes[index - 1]);
+
+			indexX = (index + 1) % this.mazeW;
+			indexY = floor(index / this.mazeW);
+			var checkingNode = this.nodes[indexX + indexY * this.mazeW];
+			if (checkingNode != undefined) {
+				this.nodes[index].neighbors.push(checkingNode);
 			}
-			if (this.nodes[index + 1] != undefined) {
-				this.nodes[i]["neighbors"].push(this.nodes[index + 1]);
+			indexX = (index - 1) % this.mazeW;
+			indexY = floor(index / this.mazeW);
+			var checkingNode = this.nodes[indexX + indexY * this.mazeW];
+			if (checkingNode != undefined) {
+				this.nodes[index].neighbors.push(checkingNode);
 			}
-			if (this.nodes[index - this.mazeW] != undefined) {
-				this.nodes[i]["neighbors"].push(this.nodes[index - this.mazeW]);
+			indexX = index % this.mazeW;
+			indexY = (floor(index / this.mazeW) + 1) % this.mazeH;
+			var checkingNode = this.nodes[indexX + indexY * this.mazeW];
+			if (checkingNode != undefined) {
+				this.nodes[index].neighbors.push(checkingNode);
 			}
-			if (this.nodes[index + this.mazeW] != undefined) {
-				this.nodes[i]["neighbors"].push(this.nodes[index + this.mazeW]);
+			indexX = index % this.mazeW;
+			indexY = (this.mazeH + floor(index / this.mazeW) - 1) % this.mazeH;
+			var checkingNode = this.nodes[indexX + indexY * this.mazeW];
+			if (checkingNode != undefined) {
+				this.nodes[index].neighbors.push(checkingNode);
 			}
 
 			var posX = index % this.mazeW;
