@@ -19,7 +19,7 @@ var addColumnButton;
 var columnText;
 var removeRowButton;
 var removeColumnButton;
-var addWallsButton;
+var addBoundaryButton;
 var clearButton;
 var invertButton;
 var drawingModeButton;
@@ -49,8 +49,8 @@ function setup() {
 		mazecreator.addColumns.bind(mazecreator));
 	removeColumnButton = new Button(200, 100, 100, 40, "Remove column", 11,
 		mazecreator.removeColumns.bind(mazecreator));
-	addWallsButton = new Button(380, 20, 100, 40, "Add walls", 14,
-		mazecreator.addWalls.bind(mazecreator));
+	addBoundaryButton = new Button(380, 20, 100, 40, "Add boundary", 14,
+		mazecreator.addBoundary.bind(mazecreator));
 	clearButton = new Button(380, 100, 50, 40, "Clear", 13,
 		mazecreator.clearMaze.bind(mazecreator));
 	invertButton = new Button(430, 100, 50, 40, "Invert", 13,

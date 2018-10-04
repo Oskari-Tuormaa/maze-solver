@@ -74,7 +74,7 @@ function showGUI() {
 			addColumnButton.show();
 			removeRowButton.show();
 			removeColumnButton.show();
-			addWallsButton.show();
+			addBoundaryButton.show();
 			clearButton.show();
 			invertButton.show();
 			drawingModeButton.show();

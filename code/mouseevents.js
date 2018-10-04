@@ -5,7 +5,7 @@ function mousePressed() {
 			addColumnButton.checkPressed(mouseX, mouseY);
 			removeRowButton.checkPressed(mouseX, mouseY);
 			removeColumnButton.checkPressed(mouseX, mouseY);
-			addWallsButton.checkPressed(mouseX, mouseY);
+			addBoundaryButton.checkPressed(mouseX, mouseY);
 			clearButton.checkPressed(mouseX, mouseY);
 			invertButton.checkPressed(mouseX, mouseY);
 			drawingModeButton.checkPressed(mouseX, mouseY);

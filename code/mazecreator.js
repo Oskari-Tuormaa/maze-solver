@@ -137,7 +137,7 @@ class MazeCreator {
 	}
 
 	// Adds walls to maze.
-	addWalls() {
+	addBoundary() {
 		this.data.fill(1, 0, this.mazeW);
 		this.data.fill(1, -this.mazeW);
 
