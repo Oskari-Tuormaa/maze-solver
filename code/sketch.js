@@ -38,8 +38,8 @@ function setup() {
 
 	mazecreator = new MazeCreator(20, 200, 760, 580, defaultWidth, defaultHeight);
 
-	rowText = new TextBox(20, 60, 100, 40, mazecreator.mazeW, 15);
-	columnText = new TextBox(200, 60, 100, 40, mazecreator.mazeH, 15);
+	rowText = new TextBox(20, 60, 100, 40, mazecreator.mazeH, 15);
+	columnText = new TextBox(200, 60, 100, 40, mazecreator.mazeW, 15);
 
 	addRowButton = new Button(20, 20, 100, 40, "Add row", 15,
 		mazecreator.addRows.bind(mazecreator));
