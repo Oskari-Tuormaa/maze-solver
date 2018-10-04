@@ -13,6 +13,10 @@ function mousePressed() {
 			solveButton.checkPressed(mouseX, mouseY);
 			mazecreator.changeCellAtPos(mouseX, mouseY);
 			break;
+
+		case states.type.DONE:
+			returnToDrawButton.checkPressed(mouseX, mouseY);
+			break;
 	}
 }
 

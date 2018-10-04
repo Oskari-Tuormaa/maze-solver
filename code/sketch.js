@@ -25,6 +25,7 @@ var invertButton;
 var drawingModeButton;
 var tileButton;
 var solveButton;
+var returnToDrawButton;
 
 function setup() {
 	createCanvas(800, 800);
@@ -62,6 +63,9 @@ function setup() {
 	tileButton.bounds.color = [255, 255, 255];
 	solveButton = new Button(680, 60, 100, 40, "Solve", 15, startSolving);
 	solveButton.bounds.color = [255, 0, 0];
+	returnToDrawButton = new Button(20, 20, 150, 40, "Return to start", 15, function() {
+		state = states.type.DRAWING;
+	});
 }
 
 function draw() {
@@ -94,7 +98,6 @@ function solving() {
 	drawnMaze.createNodes();
 	drawnMaze.initializeNodes();
 	drawnMaze.startSearch();
-	drawnMaze.populatePath();
 	solvedMaze = drawnMaze.saveMaze();
 	solvedMaze.drawPath();
 	state = states.type.DONE;

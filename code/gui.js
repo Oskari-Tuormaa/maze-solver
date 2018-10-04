@@ -85,10 +85,11 @@ function showGUI() {
 			break;
 
 		case states.type.SOLVING:
-			drawnMaze.show(20, 20, width - 40, height - 40);
+			drawnMaze.show(20, 200, width - 40, 580);
 			break;
 
 		case states.type.DONE:
-			solvedMaze.show(20, 20, width - 40, height - 40);
+			returnToDrawButton.show();
+			solvedMaze.show(20, 200, width - 40, 580);
 	}
 }

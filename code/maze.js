@@ -41,6 +41,9 @@ class Maze {
 				case 4:
 					fill(100, 100, 100);
 					break;
+				case 5:
+					fill(100, 100, 255);
+					break;
 			}
 
 			var posX = (i % this.mazeW) * cellWidth;
@@ -81,7 +84,8 @@ class Maze {
 						"tile": "end",
 						"distance": NaN,
 						"neighbors": [],
-						"cameFrom": NaN
+						"cameFrom": NaN,
+						"gScore": Infinity
 					};
 					break;
 			}
@@ -120,6 +124,12 @@ class Maze {
 	// Begin A* search to find best route from start to finish.
 	startSearch() {
 		while (this.openSet.length > 0) {
+			// If next node up for processing is end node, the best route has
+			// been found. Terminate program and calculate route.
+			if (this.findNextNode() == this.endNode) {
+				this.populatePath();
+				return;
+			}
 
 			// Find next node to process.
 			var next = this.findNextNode();
@@ -132,13 +142,12 @@ class Maze {
 			for (var node in next["neighbors"]) {
 				this.processNeighbor(next, next["neighbors"][node]);
 			}
+		}
 
-			// If next node up for processing is end node, the best route has
-			// been found. Terminate program and calculate route.
-			if (this.findNextNode() == this.endNode) {
-				this.endNode["cameFrom"] = next;
-				this.populatePath();
-				break;
+		for (var node in this.closedSet) {
+			node = this.closedSet[node];
+			if (node != this.startNode) {
+				this.data[node["index"]] = 5;
 			}
 		}
 	}
@@ -148,6 +157,7 @@ class Maze {
 	findNextNode() {
 		var best = this.openSet[0];
 		for (var node in this.openSet) {
+			node = this.openSet[node];
 			if (node["gScore"] + node["distance"] < best["gScore"] + best["distance"]) {
 				best = node;
 			}
@@ -158,8 +168,8 @@ class Maze {
 	// Does processing to neighbor value.
 	processNeighbor(me, neighbor) {
 
-		// If neighbor is already in closetSet ignore node.
-		if (this.closedSetContains(neighbor) && neighbor == this.endNode) {
+		// If neighbor is already in closedSet ignore node.
+		if (this.closedSetContains(neighbor)) {
 			return;
 		}
 
@@ -182,7 +192,7 @@ class Maze {
 	closedSetContains(n) {
 		var doesContain = false;
 		for (var node in this.closedSet) {
-			if (n == node) {
+			if (n == this.closedSet[node]) {
 				doesContain = true;
 			}
 		}
@@ -193,7 +203,7 @@ class Maze {
 	openSetContains(n) {
 		var doesContain = false;
 		for (var node in this.openSet) {
-			if (n == node) {
+			if (n == this.openSet[node]) {
 				doesContain = true;
 			}
 		}
@@ -214,11 +224,11 @@ class Maze {
 	// startNode and adds each node to path.
 	populatePath() {
 		var reachedStart = false;
-		var currNode = this.endNode["cameFrom"];
+		var currNode = this.endNode["cameFrom"]["index"];
 		while (!reachedStart) {
-			this.path.push(currNode);
-			currNode = currNode["cameFrom"];
-			if (currNode == this.startNode) {
+			this.path.push(this.nodes[currNode]);
+			currNode = this.nodes[currNode]["cameFrom"]["index"];
+			if (currNode == this.startNode["index"]) {
 				reachedStart = true;
 			}
 		}
