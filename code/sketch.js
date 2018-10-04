@@ -7,10 +7,12 @@ var currTile;
 var mazecreator;
 var drawingMode = 1;
 
+var drawnMaze;
+
 var defaultWidth = 20;
 var defaultHeight = 16;
 
-// Button initialization:
+// Button and TextBox initialization:
 var addRowButton;
 var rowText;
 var addColumnButton;
@@ -22,6 +24,8 @@ var clearButton;
 var invertButton;
 var drawingModeButton;
 var tileButton;
+var solveButton;
+var returnToDrawButton;
 
 function setup() {
 	createCanvas(800, 800);
@@ -57,6 +61,11 @@ function setup() {
 	tileButton = new Button(560, 100, 100, 40, "WALL", 15,
 		nextTile);
 	tileButton.bounds.color = [255, 255, 255];
+	solveButton = new Button(680, 60, 100, 40, "Solve", 15, startSolving);
+	solveButton.bounds.color = [255, 0, 0];
+	returnToDrawButton = new Button(20, 20, 150, 40, "Return to start", 15, function() {
+		state = states.type.DRAWING;
+	});
 }
 
 function draw() {
@@ -84,12 +93,19 @@ function drawing() {
 
 // Mase solving phase.
 function solving() {
-
+	drawnMaze = mazecreator.saveMaze();
+	showGUI();
+	drawnMaze.createNodes();
+	drawnMaze.initializeNodes();
+	drawnMaze.startSearch();
+	solvedMaze = drawnMaze.saveMaze();
+	solvedMaze.drawPath();
+	state = states.type.DONE;
 }
 
 // Showing solved maze phase.
 function done() {
-
+	showGUI();
 }
 
 // Switch the current drawing mode.
@@ -128,6 +144,27 @@ function nextTile() {
 			tileButton.text = "WALL";
 			tileButton.bounds.color = [255, 255, 255];
 			break;
+	}
+}
+
+// Checks if there's only one start and only one end. If true, changes
+// state to SOLVING.
+function startSolving() {
+	var startCount = 0;
+	var endCount = 0;
+	for (var i = 0; i < mazecreator.data.length; i++) {
+		switch (mazecreator.data[i]) {
+			case 2:
+				startCount++;
+				break;
+
+			case 3:
+				endCount++;
+				break;
+		}
+	}
+	if (startCount == 1 && endCount == 1) {
+		state = states.type.SOLVING;
 	}
 }
 
